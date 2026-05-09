@@ -9,12 +9,12 @@ import ExifReader from 'exifreader'
 import { createObjectCsvStringifier } from 'csv-writer'
 import { transformToDate } from '#certificates-stats-tags/utils/tags'
 
-const { env: { FILE_PATH } } = process
+const { env: { FROM_DIR, TO_DIR = FROM_DIR } } = process
 
-if (!FILE_PATH) throw new Error('`FILE_PATH` is required')
+if (!FROM_DIR) throw new Error('`FROM_DIR` is required')
 
-const ORIGIN = resolve(FILE_PATH)
-const DESTINATION = join(ORIGIN, 'tags.csv')
+const ORIGIN = resolve(FROM_DIR)
+const DESTINATION = join(TO_DIR ?? resolve('.'), 'tags.csv')
 const PATTERN = join(ORIGIN, '**/*.{tiff,tif}')
 
 const HEADER = [

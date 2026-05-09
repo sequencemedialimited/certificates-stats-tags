@@ -2,4 +2,6 @@
 
 import { certificates } from '#certificates-stats-tags'
 
-export default certificates()
+console.log('🚀')
+
+export default certificates().then(() => console.log('👍')).catch(({ message }) => console.error(`💥 ${message}`))

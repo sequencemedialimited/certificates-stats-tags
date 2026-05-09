@@ -1,6 +1,7 @@
 {
   "name": "certificates-stats-tags",
   "version": "0.0.0",
+  "private": true,
   "main": "./src/index.mjs",
   "type": "module",
   "types": "./index.d.mts",
@@ -22,6 +23,10 @@
     "start:stats": "node app/stats.mjs",
     "start:tags": "node app/tags.mjs"
   },
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "exifreader": "^4.38.1"
+  },
   "devDependencies": {
     "@sequencemedia/eslint-config-standard": "^0.2.107",
     "@sequencemedia/eslint-config-typescript": "^0.1.182",
@@ -29,15 +34,10 @@
     "eslint": "9.38.0",
     "globals": "^17.6.0"
   },
-  "dependencies": {
-    "csv-writer": "^1.6.0",
-    "exifreader": "^4.38.1"
-  },
   "imports": {
-    "#certificates-stats-tags/utils/*": "./src/utils/*.mjs",
-    "#certificates-stats-tags/*": "./src/*.mjs",
     "#certificates-stats-tags": "./src/index.mjs",
+    "#certificates-stats-tags/*": "./src/*.mjs",
+    "#certificates-stats-tags/utils/*": "./src/utils/*.mjs",
     "#types": "./types/index.d.mts"
-  },
-  "private": true
+  }
 }
