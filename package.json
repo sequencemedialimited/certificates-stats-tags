@@ -1,0 +1,43 @@
+{
+  "name": "certificates-stats-tags",
+  "version": "0.0.0",
+  "main": "./src/index.mjs",
+  "type": "module",
+  "types": "./index.d.mts",
+  "author": {
+    "name": "Jonathan Perry for Sequence Media Limited",
+    "email": "sequencemedia@sequencemedia.net",
+    "url": "https://sequencemedia.net"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sequencemedialimited/certificates-stats-tags.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "node app.mjs",
+    "start:certificates": "node app/certificates.mjs",
+    "start:stats": "node app/stats.mjs",
+    "start:tags": "node app/tags.mjs"
+  },
+  "devDependencies": {
+    "@sequencemedia/eslint-config-standard": "^0.2.107",
+    "@sequencemedia/eslint-config-typescript": "^0.1.182",
+    "@types/node": "^25.6.2",
+    "eslint": "9.38.0",
+    "globals": "^17.6.0"
+  },
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "exifreader": "^4.38.1"
+  },
+  "imports": {
+    "#certificates-stats-tags/utils/*": "./src/utils/*.mjs",
+    "#certificates-stats-tags/*": "./src/*.mjs",
+    "#certificates-stats-tags": "./src/index.mjs",
+    "#types": "./types/index.d.mts"
+  },
+  "private": true
+}
