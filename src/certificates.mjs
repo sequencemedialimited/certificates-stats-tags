@@ -1,14 +1,14 @@
 import { resolve, join, parse } from 'node:path'
+import { homedir } from 'node:os'
 import { createWriteStream } from 'node:fs'
 import { unlink, glob } from 'node:fs/promises'
 import { createObjectCsvStringifier } from 'csv-writer'
+import configMap from './config.mjs'
 
-const { env: { FROM_DIR, TO_DIR = FROM_DIR } } = process
+if (!configMap.has('from')) throw new Error('`from` is required')
 
-if (!FROM_DIR) throw new Error('`FROM_DIR` is required')
-
-const ORIGIN = resolve(FROM_DIR)
-const DESTINATION = join(TO_DIR ?? resolve('.'), 'certificates.csv')
+const ORIGIN = resolve(String(configMap.get('from')).trim().replace(/^~/, homedir()))
+const DESTINATION = join(resolve(String(configMap.get('to') ?? ORIGIN).trim().replace(/^~/, homedir()), 'certificates.csv'))
 const PATTERN = join(ORIGIN, '**/*.{tiff,tif}')
 
 const HEADER = [

@@ -25,12 +25,14 @@
   },
   "dependencies": {
     "csv-writer": "^1.6.0",
-    "exifreader": "^4.38.1"
+    "exifreader": "^4.38.1",
+    "yargs-parser": "^22.0.0"
   },
   "devDependencies": {
     "@sequencemedia/eslint-config-standard": "^0.2.107",
     "@sequencemedia/eslint-config-typescript": "^0.1.182",
     "@types/node": "^25.6.2",
+    "@types/yargs-parser": "^21.0.3",
     "eslint": "9.38.0",
     "globals": "^17.6.0"
   },

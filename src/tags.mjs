@@ -3,18 +3,18 @@
  */
 
 import { resolve, join } from 'node:path'
+import { homedir } from 'node:os'
 import { createWriteStream } from 'node:fs'
 import { unlink, readFile, glob } from 'node:fs/promises'
 import ExifReader from 'exifreader'
 import { createObjectCsvStringifier } from 'csv-writer'
 import { transformToDate } from '#certificates-stats-tags/utils/tags'
+import configMap from './config.mjs'
 
-const { env: { FROM_DIR, TO_DIR = FROM_DIR } } = process
+if (!configMap.has('from')) throw new Error('`from` is required')
 
-if (!FROM_DIR) throw new Error('`FROM_DIR` is required')
-
-const ORIGIN = resolve(FROM_DIR)
-const DESTINATION = join(TO_DIR ?? resolve('.'), 'tags.csv')
+const ORIGIN = resolve(String(configMap.get('from')).trim().replace(/^~/, homedir()))
+const DESTINATION = join(resolve(String(configMap.get('to') ?? ORIGIN).trim().replace(/^~/, homedir()), 'tags.csv'))
 const PATTERN = join(ORIGIN, '**/*.{tiff,tif}')
 
 const HEADER = [
