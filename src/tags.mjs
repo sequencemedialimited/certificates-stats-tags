@@ -67,8 +67,8 @@ export default async function tags () {
       const buffer = await readFile(filePath)
 
       /**
-     *  @type {ExifType}
-     */
+       *  @type {ExifType}
+       */
       const {
         FileType: { value: fileType } = { value: null },
         DateTime: { value: dateTime } = { value: null },
