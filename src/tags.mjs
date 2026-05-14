@@ -2,8 +2,8 @@
  *  @typedef {import('#types').ExifType} ExifType
  */
 
-import { resolve, join } from 'node:path'
-import { createWriteStream } from 'node:fs'
+import { resolve, join, parse } from 'node:path'
+import { createWriteStream, lstatSync } from 'node:fs'
 import { unlink, readFile, glob } from 'node:fs/promises'
 import ExifReader from 'exifreader'
 import { createObjectCsvStringifier } from 'csv-writer'
@@ -14,7 +14,14 @@ import configMap from './config.mjs'
 if (!configMap.has('from')) throw new Error('`from` is required')
 
 const ORIGIN = resolve(normalise(configMap.get('from')))
-const DESTINATION = join(resolve(normalise(configMap.get('to') || ORIGIN), 'tags.csv'))
+try {
+  lstatSync(ORIGIN)
+} catch {
+  throw new Error('No such `from`')
+}
+const to = resolve(normalise(configMap.get('to') || ORIGIN))
+const isDirectory = !parse(to).ext
+const DESTINATION = isDirectory ? join(to, 'tags.csv') : to
 const PATTERN = join(ORIGIN, '**/*.{tiff,tif}')
 
 const HEADER = [

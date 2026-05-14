@@ -1,5 +1,5 @@
 import { resolve, join, parse } from 'node:path'
-import { createWriteStream } from 'node:fs'
+import { createWriteStream, lstatSync } from 'node:fs'
 import { unlink, glob } from 'node:fs/promises'
 import { createObjectCsvStringifier } from 'csv-writer'
 import normalise from './utils/normalise.mjs'
@@ -8,7 +8,14 @@ import configMap from './config.mjs'
 if (!configMap.has('from')) throw new Error('`from` is required')
 
 const ORIGIN = resolve(normalise(configMap.get('from')))
-const DESTINATION = join(resolve(normalise(configMap.get('to') || ORIGIN), 'certificates.csv'))
+try {
+  lstatSync(ORIGIN)
+} catch {
+  throw new Error('No such `from`')
+}
+const to = resolve(normalise(configMap.get('to') || ORIGIN))
+const isDirectory = !parse(to).ext
+const DESTINATION = isDirectory ? join(to, 'certificates.csv') : to
 const PATTERN = join(ORIGIN, '**/*.{tiff,tif}')
 
 const HEADER = [
