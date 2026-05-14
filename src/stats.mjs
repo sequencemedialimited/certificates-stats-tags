@@ -64,12 +64,12 @@ export default async function stats () {
         birthtimeMs
       } = await stat(filePath)
 
-      await (new Promise((resolve) => {
-        const atime = new Date(atimeMs)
-        const mtime = new Date(mtimeMs)
-        const ctime = new Date(ctimeMs)
-        const birthtime = new Date(birthtimeMs)
+      const atime = new Date(atimeMs)
+      const mtime = new Date(mtimeMs)
+      const ctime = new Date(ctimeMs)
+      const birthtime = new Date(birthtimeMs)
 
+      await (new Promise((resolve) => {
         writeStream.write(csvStringifier.stringifyRecords([{
           filePath,
           size,
