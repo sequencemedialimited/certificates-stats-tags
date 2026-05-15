@@ -22,12 +22,12 @@ const HEADER = [
   { id: 'filePath', title: 'File Path' },
   { id: 'size', title: 'Size' },
   { id: 'atime', title: 'Accessed Time' },
-  { id: 'atimeMs', title: 'Accessed Time (ms)' },
   { id: 'mtime', title: 'Modified Time' },
-  { id: 'mtimeMs', title: 'Modified Time (ms)' },
   { id: 'ctime', title: 'Created Time' },
-  { id: 'ctimeMs', title: 'Created Time (ms)' },
   { id: 'birthtime', title: 'Birth Time' },
+  { id: 'atimeMs', title: 'Accessed Time (ms)' },
+  { id: 'mtimeMs', title: 'Modified Time (ms)' },
+  { id: 'ctimeMs', title: 'Created Time (ms)' },
   { id: 'birthtimeMs', title: 'Birth Time (ms)' }
 ]
 
@@ -73,14 +73,14 @@ export default async function stats () {
         writeStream.write(csvStringifier.stringifyRecords([{
           filePath,
           size,
-          atime: atime.toISOString(),
           atimeMs,
-          mtime: mtime.toISOString(),
           mtimeMs,
-          ctime: ctime.toISOString(),
           ctimeMs,
-          birthtime: birthtime.toISOString(),
-          birthtimeMs
+          birthtimeMs,
+          atime: atime.toISOString(),
+          mtime: mtime.toISOString(),
+          ctime: ctime.toISOString(),
+          birthtime: birthtime.toISOString()
         }]), resolve)
       }))
     }
