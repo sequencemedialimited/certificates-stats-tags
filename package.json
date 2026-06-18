@@ -18,7 +18,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky",
+    "prepare": "node husky.mjs",
     "start": "cross-env NODE_ENV=production node app.mjs",
     "start:certificates": "cross-env NODE_ENV=production node app/certificates.mjs",
     "start:stats": "cross-env NODE_ENV=production node app/stats.mjs",
