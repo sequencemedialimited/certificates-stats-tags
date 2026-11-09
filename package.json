@@ -44,5 +44,8 @@
     "#certificates-stats-tags/*": "./src/*.mjs",
     "#certificates-stats-tags/utils/*": "./src/utils/*.mjs",
     "#types": "./types/index.d.mts"
+  },
+  "allowScripts": {
+    "exifreader@4.54.0": true
   }
 }
